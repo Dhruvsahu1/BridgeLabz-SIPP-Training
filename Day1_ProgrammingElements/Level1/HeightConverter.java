@@ -10,8 +10,6 @@ public class HeightConverter {
 
    
         double totalInches = heightCm / 2.54;
-
-      
         int feet = (int)(totalInches / 12);
         double inches = totalInches % 12;
 

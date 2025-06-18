@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 public class TwoDInto1D {
     public static void main(String[] args) {

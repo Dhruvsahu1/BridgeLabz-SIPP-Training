@@ -1,0 +1,50 @@
+CLASS Course
+    PROPERTIES:
+        title
+        duration
+        price
+    CONSTRUCTOR(title, duration, price)
+        SET this.title = title
+        SET this.duration = duration
+        SET this.price = price
+    METHOD showDetails()
+        PRINT "Title: " + title
+        PRINT "Duration: " + duration
+        PRINT "Price: " + price
+
+CLASS Student
+    PROPERTIES:
+        name
+        email
+        enrolledCourses (LIST of Course)
+    CONSTRUCTOR(name, email)
+        SET this.name = name
+        SET this.email = email
+        SET enrolledCourses = empty list
+    METHOD enroll(course)
+        IF course already exists in enrolledCourses
+            PRINT "Already enrolled in " + course.title
+        ELSE
+            ADD course to enrolledCourses
+            PRINT name + " enrolled in " + course.title
+    METHOD viewEnrolledCourses()
+        PRINT "Enrolled courses for " + name
+        FOR each course in enrolledCourses
+            PRINT course.title + " (" + course.duration + ", ₹" + course.price + ")"
+
+MAIN PROGRAM:
+    CREATE courses:
+        javaBasics = new Course("Java Programming Basics", "6 weeks", 4999)
+        dsJava = new Course("Data Structures in Java", "8 weeks", 5999)
+        springBoot = new Course("Spring Boot for Web Development", "10 weeks", 6999)
+
+    CREATE student Amit ("Amit", "amit@email.com")
+    Amit.enroll(javaBasics)
+    Amit.enroll(dsJava)
+
+    CREATE student Priya ("Priya", "priya@email.com")
+    Priya.enroll(springBoot)
+    Priya.enroll(javaBasics)
+
+    Amit.viewEnrolledCourses()
+    Priya.viewEnrolledCourses()

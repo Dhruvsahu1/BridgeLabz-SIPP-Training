@@ -1,0 +1,40 @@
+CLASS Room
+    PROPERTIES:
+        roomNumber
+        customerName
+        daysStayed
+    CONSTRUCTOR(roomNumber, customerName, daysStayed)
+        SET this.roomNumber = roomNumber
+        SET this.customerName = customerName
+        SET this.daysStayed = daysStayed
+    METHOD calculateBill()
+        RETURN 0
+    METHOD printInvoice(roomType, totalBill)
+        PRINT "Room Type: " + roomType
+        PRINT "Customer: " + customerName
+        PRINT "Nights Stayed: " + daysStayed
+        PRINT "Total Bill: ₹" + totalBill
+        
+
+CLASS DeluxeRoom EXTENDS Room
+    RATE = 3000
+    CONSTRUCTOR(roomNumber, customerName, daysStayed)
+        CALL parent constructor(roomNumber, customerName, daysStayed)
+    METHOD calculateBill()
+        RETURN daysStayed * RATE
+
+CLASS SuiteRoom EXTENDS Room
+    RATE = 5000
+    CONSTRUCTOR(roomNumber, customerName, daysStayed)
+        CALL parent constructor(roomNumber, customerName, daysStayed)
+    METHOD calculateBill()
+        RETURN daysStayed * RATE
+
+MAIN PROGRAM:
+    room1 = new DeluxeRoom(101, "Ravi", 3)
+    bill1 = room1.calculateBill()
+    room1.printInvoice("Deluxe", bill1)
+
+    room2 = new SuiteRoom(201, "Anita", 2)
+    bill2 = room2.calculateBill()
+    room2.printInvoice("Suite", bill2)

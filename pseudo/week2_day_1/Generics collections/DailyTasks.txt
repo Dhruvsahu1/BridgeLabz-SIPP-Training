@@ -1,0 +1,23 @@
+class DailyTasks
+    tasks = new LinkedHashMap<Integer, String>()
+    taskId = 1
+
+    method addTask(description):
+        tasks.put(taskId, description)
+        taskId = taskId + 1
+
+    method removeTask(id):
+        tasks.remove(id)
+
+    method viewTasks():
+        for entry in tasks:
+            print entry.key + " → " + entry.value
+
+main():
+    organizer = new DailyTasks()
+    organizer.addTask("Check emails")
+    organizer.addTask("Prepare sales report")
+    organizer.addTask("Call client")
+    organizer.viewTasks()
+    organizer.removeTask(2)
+    organizer.viewTasks()

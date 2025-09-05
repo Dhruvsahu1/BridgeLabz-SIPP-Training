@@ -1,0 +1,65 @@
+Pseudo-code Problems - Day 3
+
+Library Book Filter
+
+CLASS Book
+    VARIABLE title : STRING
+    VARIABLE publishedYear : INTEGER
+    VARIABLE rating : DOUBLE
+
+MAIN
+    books : LIST<Book>
+    books.add( Book("Java Mastery", 2018, 4.7) )
+    books.add( Book("Old Classics", 2010, 4.8) )
+    books.add( Book("Modern Streams", 2021, 4.9) )
+
+    filteredBooks = books.stream()
+                    .filter( book -> book.publishedYear > 2015 )
+                    .filter( book -> book.rating > 4.5 )
+                    .collect( toList )
+
+    PRINT "Books after 2015 with rating > 4.5:"
+    FOR book IN filteredBooks
+        PRINT book.title + " (" + book.publishedYear + ") - Rating: " + book.rating
+
+/////////////////////////////////////////////////////////////////////////////////////////
+========================================================================================
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Payment Processor
+
+CLASS Transaction<T>
+    VARIABLE method : T
+    VARIABLE amount : DOUBLE
+
+    METHOD constructor(method, amount)
+        this.method = method
+        this.amount = amount
+
+    METHOD process()
+        PRINT "Processing payment of " + amount + " via " + method
+
+// Payment methods
+CLASS UPI
+    VARIABLE upiId : STRING
+    METHOD toString()
+        RETURN "UPI (" + upiId + ")"
+
+CLASS Card
+    VARIABLE cardNumber : STRING
+    METHOD toString()
+        RETURN "Card ending " + last 4 digits of cardNumber
+
+CLASS NetBanking
+    VARIABLE bankName : STRING
+    METHOD toString()
+        RETURN "NetBanking (" + bankName + ")"
+
+MAIN
+    txn1 = NEW Transaction<UPI>( UPI("amit@upi"), 1500.00 )
+    txn2 = NEW Transaction<Card>( Card("1234567812345678"), 4500.50 )
+    txn3 = NEW Transaction<NetBanking>( NetBanking("HDFC Bank"), 2500.75 )
+
+    txn1.process()
+    txn2.process()
+    txn3.process()

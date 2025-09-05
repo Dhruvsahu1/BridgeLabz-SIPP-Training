@@ -1,0 +1,41 @@
+class User
+    attributes:
+        username
+        password
+
+    method login():
+        print "Checking login credentials..."
+        // base validation (common to all users)
+class Student extends User
+    attributes:
+        enrolledCourse
+
+    method login():
+        if validateCredentials(username, password) == true then
+            if enrolledCourse is not null then
+                print "Student login successful. Showing available exams..."
+            else
+                print "Student not enrolled in any course. Access denied."
+        else
+            print "Invalid student credentials."
+class Admin extends User
+    attributes:
+        hasAdminPrivileges
+
+    method login():
+        if validateCredentials(username, password) == true then
+            if hasAdminPrivileges == true then
+                print "Admin login successful. Showing exam management tools..."
+            else
+                print "User does not have admin privileges."
+        else
+            print "Invalid admin credentials."
+main():
+    student1 = new Student("john123", "pass123", "Math101")
+    student1.login()
+    // Output: Student login successful. Showing available exams...
+
+    admin1 = new Admin("admin01", "adminpass", true)
+    admin1.login()
+    // Output: Admin login successful. Showing exam management tools...
+

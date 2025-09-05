@@ -1,0 +1,66 @@
+class Node
+    attributes:
+        stopName
+        next
+    constructor(stopName):
+        this.stopName = stopName
+        this.next = null
+
+class BusRoute
+    attributes:
+        head
+    method addStop(afterStop, newStopName):
+        current = head
+        while current is not null:
+            if current.stopName == afterStop then
+                newNode = new Node(newStopName)
+                newNode.next = current.next
+                current.next = newNode
+                print newStopName + " added after " + afterStop
+                return
+            current = current.next
+        print "Stop " + afterStop + " not found in the route."
+    method removeStop(stopName):
+        current = head
+        prev = null
+        while current is not null:
+            if current.stopName == stopName then
+                if prev == null then
+                    head = current.next
+                else
+                    prev.next = current.next
+                print stopName + " removed from the route."
+                return
+            prev = current
+            current = current.next
+        print "Stop " + stopName + " not found."
+    method searchStop(stopName):
+        current = head
+        while current is not null:
+            if current.stopName == stopName then
+                print stopName + " is in the route."
+                return true
+            current = current.next
+        print stopName + " not found in the route."
+        return false
+    method displayRoute():
+        current = head
+        print "Current Route: "
+        while current is not null:
+            print current.stopName + " → "
+            current = current.next
+        print "END"
+
+main():
+    route = new BusRoute()
+    route.head = new Node("Depot")
+    route.head.next = new Node("Main Street")
+    route.head.next.next = new Node("City Mall")
+    route.head.next.next.next = new Node("Hospital")
+    route.head.next.next.next.next = new Node("Airport")
+    route.displayRoute()
+    route.addStop("City Mall", "University")
+    route.displayRoute()
+    route.removeStop("Hospital")
+    route.displayRoute()
+    route.searchStop("Airport")

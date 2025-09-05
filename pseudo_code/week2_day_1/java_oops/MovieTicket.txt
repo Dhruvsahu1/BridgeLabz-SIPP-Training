@@ -1,0 +1,63 @@
+class Ticket
+    private attributes:
+        movieName
+        seatNumber
+        price
+        isBooked
+
+    constructor(movieName, seatNumber, price):
+        this.movieName = movieName
+        this.seatNumber = seatNumber
+        this.price = price
+        this.isBooked = true
+
+    method cancelTicket():
+        if isBooked == true then
+            isBooked = false
+            print "Ticket for seat " + seatNumber + " cancelled."
+        else
+            print "Ticket already cancelled."
+class Theatre
+    private attributes:
+        theatreName
+        availableSeats (list)
+        bookedTickets (list)
+
+    constructor(theatreName, availableSeats):
+        this.theatreName = theatreName
+        this.availableSeats = availableSeats
+        this.bookedTickets = empty list
+
+    method issueTicket(movieName, seatNumber, price):
+        if seatNumber in availableSeats then
+            ticket = new Ticket(movieName, seatNumber, price)
+            add ticket to bookedTickets
+            remove seatNumber from availableSeats
+            print "Ticket issued for " + movieName + ", Seat: " + seatNumber
+            return ticket
+        else
+            print "Seat " + seatNumber + " not available."
+            return null
+
+    method cancelTicket(ticket):
+        if ticket != null and ticket.isBooked == true then
+            ticket.cancelTicket()
+            add ticket.seatNumber back to availableSeats
+            remove ticket from bookedTickets
+        else
+            print "Invalid or already cancelled ticket."
+main():
+    theatre1 = new Theatre("PVR Cinema", ["A10", "A11", "A12"])
+    customer1 = new Customer("Ravi")
+
+    customer1.browseMovies(theatre1)
+    // Output: Available seats: A10, A11, A12
+
+    ticket1 = customer1.bookTicket(theatre1, "Avengers: Endgame (6 PM)", "A12", 300)
+    // Output: Ticket issued for Avengers: Endgame (6 PM), Seat: A12
+    // Output: Ravi booked seat A12 for Avengers: Endgame (6 PM)
+
+    customer1.cancelTicket(theatre1, ticket1)
+    // Output: Ticket for seat A12 cancelled.
+    // Output: Ravi cancelled ticket for Avengers: Endgame (6 PM)
+

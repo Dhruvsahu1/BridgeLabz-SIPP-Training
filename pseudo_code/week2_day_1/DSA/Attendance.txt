@@ -1,0 +1,29 @@
+class AttendanceTracker
+    attributes:
+        attendance[students][days]
+
+    constructor(students, days):
+        create 2D array attendance[students][days] initialized with 'A'
+
+    method markAttendance(student, day, status):
+        attendance[student][day] = status
+
+    method updateAttendance(student, day, status):
+        attendance[student][day] = status
+
+    method generateReport(student):
+        count = 0
+        for d from 1 to days:
+            if attendance[student][d] == 'P':
+                count = count + 1
+        print "Student " + student + " was present " + count + " days."
+        return count
+
+main():
+    tracker = new AttendanceTracker(3, 31)
+    tracker.markAttendance(1,1,'P')
+    tracker.markAttendance(1,2,'P')
+    tracker.markAttendance(1,3,'A')
+    tracker.markAttendance(1,4,'P')
+    tracker.updateAttendance(1,3,'P')
+    tracker.generateReport(1)

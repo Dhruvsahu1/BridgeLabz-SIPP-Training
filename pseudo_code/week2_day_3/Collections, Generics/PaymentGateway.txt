@@ -1,0 +1,53 @@
+CLASS Transaction<T>
+    transactionData
+    
+    METHOD Constructor(transactionData)
+        SET this.transactionData = transactionData
+    
+    METHOD processPayment()
+        PRINT "Processing Payment..."
+        PRINT transactionData.getTransactionDetails()
+
+CLASS UPI
+    upiId
+    amount
+    merchantName
+    
+    METHOD Constructor(upiId, amount, merchantName)
+        SET fields accordingly
+    
+    METHOD getTransactionDetails()
+        RETURN "Payment of ₹" + amount + " via UPI successful for " + merchantName
+
+CLASS Card
+    cardNumber
+    cvv
+    expiryDate
+    amount
+    
+    METHOD Constructor(cardNumber, cvv, expiryDate, amount)
+        SET fields accordingly
+    
+    METHOD getTransactionDetails()
+        RETURN "Payment of ₹" + amount + " via Card ending " + last4(cardNumber) + " successful."
+
+CLASS NetBanking
+    bankName
+    accountNumber
+    amount
+    
+    METHOD Constructor(bankName, accountNumber, amount)
+        SET fields accordingly
+    
+    METHOD getTransactionDetails()
+        RETURN "Payment of ₹" + amount + " via NetBanking (" + bankName + ") successful."
+
+// ----- Simulation -----
+t1 = Transaction<UPI>(UPI("ramesh@upi", 1200, "Amazon"))
+t1.processPayment()
+
+t2 = Transaction<Card>(Card("1234-5678-9876-5432", "123", "12/27", 5000))
+t2.processPayment()
+
+t3 = Transaction<NetBanking>(NetBanking("HDFC", "00112233", 8000))
+t3.processPayment()
